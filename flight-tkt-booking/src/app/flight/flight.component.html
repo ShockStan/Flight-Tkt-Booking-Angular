@@ -1,0 +1,43 @@
+<ng-container>
+<div class="flex justify-center bg-[#424242] h-screen w-screen">
+    <div class="mat-elevation-z8 w-[90%]">
+        <table mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="flightNo">
+                <th mat-header-cell *matHeaderCellDef> Flight </th>
+                <td mat-cell *matCellDef="let flight" class="font-antique text-[10px]"> {{flight.flightNo}} </td>
+            </ng-container>
+            <ng-container matColumnDef="from">
+                <th mat-header-cell *matHeaderCellDef> From </th>
+                <td mat-cell *matCellDef="let flight" class="font-hammer"> {{flight.from}} </td>
+            </ng-container>
+            <ng-container matColumnDef="to">
+                <th mat-header-cell *matHeaderCellDef> To </th>
+                <td mat-cell *matCellDef="let flight" class="font-hammer"> {{flight.to}} </td>
+            </ng-container>
+            <ng-container matColumnDef="etd">
+                <th mat-header-cell *matHeaderCellDef> ETD </th>
+                <td mat-cell *matCellDef="let flight" class="font-contrail"> {{flight.etd}} </td>
+            </ng-container>
+            <ng-container matColumnDef="eta">
+                <th mat-header-cell *matHeaderCellDef> ETA </th>
+                <td mat-cell *matCellDef="let flight" class="font-contrail"> {{flight.eta}} </td>
+            </ng-container>
+            <ng-container matColumnDef="economyTktPrice">
+                <th mat-header-cell *matHeaderCellDef> Economy Price </th>
+                <td mat-cell *matCellDef="let flight" class="font-khand"> {{flight.economyTktPrice | currency:"&#8377;"}} </td>
+            </ng-container>
+            <ng-container matColumnDef="businessTktPrice">
+                <th mat-header-cell *matHeaderCellDef> Business Price </th>
+                <td mat-cell *matCellDef="let flight" class="font-khand"> {{flight.businessTktPrice| currency:"&#8377;"}} </td>
+            </ng-container><ng-container matColumnDef="flightCompany">
+                <th mat-header-cell *matHeaderCellDef> Company </th>
+                <td mat-cell *matCellDef="let flight"> <img src="../../assets/logos/{{flight.flightCompany}}.png" alt=""
+                        class="w-[80px] lg:w-[250px]" /> </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[10, 20, 30, 40, 50]" showFirstLastButtons></mat-paginator>
+    </div>
+</div>
+</ng-container>

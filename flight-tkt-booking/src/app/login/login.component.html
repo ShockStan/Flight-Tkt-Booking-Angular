@@ -1,0 +1,54 @@
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+
+<body class="bg-[#303037] h-[100%] overflow-hidden">
+    <div class="grid h-screen place-items-center">
+        <div
+            class="max-w-full border-3 border-white hover:shadow-[-10px_-10px_30px_4px_rgba(182,21,221,0.60),_10px_10px_30px_4px_rgba(211,39,168,0.60)] rounded-xl">
+            <mat-card class="rounded-xl border-3 border-white" style="background-color:transparent">
+                <div class="border-b-2 border-white">
+                    <mat-card-header class="bg-[#101010] rounded-t-xl border-t-3 border-t-white">
+                        <p class="az text-white font-bold text-bold drop-shadow-[1.5px_1.5px_1.5px_rgba(0,0,0,0.8)]">Login</p>
+                    </mat-card-header>
+                </div>
+                <mat-card-content class="bg-[#101010] rounded-b-xl">
+                    <form [formGroup]="loginform" (ngSubmit)="proceedLogin()">
+                        <div class="flex flex-column">
+                            <div class="w-64 m-auto p-1 mt-4">
+                                <mat-form-field class="w-full">
+                                    <mat-label>Email</mat-label>
+                                    <input matInput type="email" formControlName="email" placeholder="email...." autocomplete="off">
+                                    <mat-error *ngIf="this.loginform.value.email===''">Required</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="w-64 m-auto p-1">
+                                <mat-form-field class="w-full">
+                                    <mat-label>Password</mat-label>
+                                    <input matInput type="password" formControlName="password"  autocomplete="off"
+                                        placeholder="password...." class="text-white">
+                                    <mat-error *ngIf="this.loginform.value.password===''">Required</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="w-64 flex flex-column m-auto p-1 ">
+                                <div class="w-full">
+                                    <button class="w-full h-full" mat-raised-button
+                                        style="background: linear-gradient(to right, #b615dd 0%, #d327a8 52%);">Log
+                                        in</button>
+                                </div>
+                                <div class="mt-2 flex justify-center items-center">
+                                    <p class="text-[#7b7b7b] font-semibold text-sm">Dont have an account? <a
+                                            routerLink="/signup" class="no-underline text-white">Sign up!
+                                        </a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+    </div>
+
+</body>

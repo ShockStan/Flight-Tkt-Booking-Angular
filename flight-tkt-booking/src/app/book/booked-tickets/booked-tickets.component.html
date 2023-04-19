@@ -1,0 +1,34 @@
+<div #abc id="abc" class="w-[700px] flex flex-col">
+    <div class="w-[700px] h-[200px] rounded-[20px] bg-stone-200 flex flex-row border-2 border-black my-2" *ngFor="let passenger of passengers?.passengers">
+        <div class="w-[666px] h-full rounded-l-[20px]">
+            <p class="font-courier text-[15px] relative top-[20px] left-[33px]">Name of the Passenger</p>
+            <p class="font-antique text-[20px] font-[800] relative left-[33px] top-[10px]">{{passenger.name}}, {{passenger.age}}</p>
+            <p class="font-courier text-[20px] relative left-[33px] top-[15px]">From:&nbsp;{{flight.from}}<br>To:&nbsp;&nbsp; {{flight.to}}</p>
+            <p class="font-contrail text-[20px] relative left-[33px] top-[25px]">ETD: {{flight.etd}}<br>ETA: {{flight.eta}}</p>
+            <div class=" relative text-center -top-[147px] -left-[54px]">
+            <p class="font-courier text-[12px] font-bold">Flight<br><b>{{flight.flightNo}}</b></p>
+            </div>
+            <div class=" relative text-center -top-[201px] left-[35px]">
+            <p class="font-courier text-[12px] font-bold">Date<br><b>{{date}}</b></p>
+            </div>
+            <div class=" relative text-center -top-[254px] left-[115px]">
+            <p class="font-courier text-[12px] font-bold text-center">Seat<br><strong>{{passenger.seatNo}}</strong></p>
+            </div>
+            <div class="flex flex-row w-[180px] justify-around relative -top-[295px] left-[480px]">
+            <p class="font-federo text-[35px]">TRIPSter</p>
+            <img class="w-[30px] h-[30px]" src="../../../assets/icons/travel.png" alt=""/>
+            </div>
+            <div class=" relative text-center -top-[196px] left-[25px]">
+            <p class="font-courier text-[15px] text-center" *ngIf="passenger.tier==='Economy' else elseBlock">{{flight.from}}-{{flight.to}}-{{flight.flightCompany}}-E-{{passenger.seatNo}}</p>
+            <ng-template #elseBlock><p class="font-courier text-[15px] text-center">{{flight.from}}-{{flight.to}}-{{flight.flightCompany}}-B-{{passenger.seatNo}}</p></ng-template>
+            </div>
+            <div class="relative -top-[294px] left-[168px]"><img class="w-[60px] h-[60px]" src="../../../assets/icons/travelling.png" alt="" /></div>
+            <div class="w-[193px] h-[50px] relative -top-[352px] left-[260px]"><img class="" src="../../../assets/logos/{{flight.flightCompany}}.png" alt=""/></div>
+            <div class="w-[110px] h-[110px] bg-blue-400 relative -top-[430px] left-[500px]">
+                <ngx-qrcode *ngIf="passenger.tier==='Economy' else elseblock" value="{{flight.from}}-{{flight.to}}-{{flight.flightCompany}}-E-{{passenger.seatNo}}->{{flight.flightNo}}->{{flight.etd}}"></ngx-qrcode>
+                <ng-template #elseblock><ngx-qrcode value="{{flight.from}}-{{flight.to}}-{{flight.flightCompany}}-B-{{passenger.seatNo}}"></ngx-qrcode></ng-template>
+            </div>
+        </div>
+        <div class="tier font-courier text-[15px] h-full w-[34px] rounded-r-[18px] bg-slate-700 text-white text-center"><p class="relative left-[7px] text-white">{{passenger.tier}}</p></div>
+    </div>
+</div>

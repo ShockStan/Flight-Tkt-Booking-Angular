@@ -1,0 +1,50 @@
+<div class="w-full h-full">
+    <div class="flex w-full h-[80%] flex-col justify-evenly">
+        <div class="text-black flex justify-center w-full relative top-[10%] ">
+            <table class="w-[80%] relative left-[8%]">
+                <tr>
+                    <th class="font-courier lg:text-[18px]">Username</th>
+                    <th class="font-courier lg:text-[18px]">Email</th>
+                </tr>
+                <tr>
+                    <td class="lg:font-antique lg:text-[20px]">{{username}}</td>
+                    <td class="lg:font-antique lg:text-[20px]">{{email}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="w-[80%] flex relative left-[10%]">
+            <mat-form-field class="w-full" color="accent">
+                <mat-label>Message</mat-label>
+                <textarea matInput type="text" placeholder="Enter your message here...." [(ngModel)]="msg" required
+                    matTextareaAutosize rows="3"></textarea>
+            </mat-form-field>
+        </div>
+        <div class="w-full flex justify-center relative -top-[10%]">
+            <button mat-raised-button (click)="post()" color="primary">Post</button>
+        </div>
+    </div>
+    <div class="lg:relative lg:left-[40%]">
+        <div class="flex flex-row w-full lg:w-[20%] h-[40px] justify-evenly items-center">
+            <a href="{{socialMedia.ig}}" target="_blank">
+            <div class="ig hover:-translate-y-2 hover:rounded-full w-[30px] h-[30px] hover:w-[40px] hover:h-[40px] flex justify-center items-center hover:text-white text-[22px] hover:font-bold">
+                <fa-icon [icon]="igIcon"></fa-icon>
+            </div>
+            </a>
+            <a href="{{socialMedia.twitter}}" target="_blank">
+            <div class="hover:rounded-full hover:-translate-y-2 w-[30px] h-[30px] hover:w-[40px] hover:h-[40px] hover:bg-red-600 flex justify-center items-center hover:text-white text-[22px] hover:bg-[#1d9bf0] hover:border-white hover:border-[1px] hover:font-bold">
+                <fa-icon [icon]="twitterIcon"></fa-icon>
+            </div>
+            </a>
+            <a href="{{socialMedia.gh}}" target="_blank">
+            <div class="hover:rounded-full hover:-translate-y-2 w-[30px] h-[30px] hover:w-[40px] hover:h-[40px] hover:bg-red-600 flex justify-center items-center hover:text-white text-[22px] hover:bg-[#24292f] hover:border-white hover:border-[1px] hover:font-bold">
+                <fa-icon [icon]="githubIcon"></fa-icon>
+            </div>
+            </a>
+            <a href="{{socialMedia.li}}" target="_blank">
+            <div class="hover:rounded-full hover:-translate-y-2 w-[30px] h-[30px] hover:w-[40px] hover:h-[40px] hover:bg-red-600 flex justify-center items-center hover:text-white text-[22px] hover:border-white hover:border-[1px] hover:font-bold hover:bg-[#0077b5]">
+                <fa-icon [icon]="liIcon"></fa-icon>
+            </div>
+            </a>
+        </div>
+    </div>
+</div>

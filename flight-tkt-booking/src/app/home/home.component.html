@@ -1,0 +1,201 @@
+<div class="lg:hidden">
+    <div
+        class="z-[100] flex border-2 text-black font-khand border-black rounded-[25px] bg-no-repeat bg-cover bg-[url('/../assets/bg/search-bg.svg')] absolute top-[20px] left-1/2 -translate-x-1/2 h-[138px] w-[280px]">
+        <div class="flex flex-col w-full h-full">
+            <div class="flex flex-row justify-evenly">
+                <div class="relative top-[25px]">
+                    <ng-select [items]="city" [(ngModel)]="from" bindLabel="name" bindValue="id" placeholder="From"
+                        [clearable]="false" class="w-[120px] sm:text-sm">
+                        <ng-template ng-option-tmp let-item="item">
+                            <div class="text-black">
+                                {{ item.name }}
+                            </div>
+                        </ng-template>
+                    </ng-select>
+                </div>
+                <button
+                    class="w-[30px] h-[30px] rounded-[50%] border-1 border-black bg-black text-white text-[26px] absolute left-[50%] -translate-y-1/2 -translate-x-1/2 top-[32%] z-[100]"
+                    (click)="swap()">
+                    <mat-icon class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">swap_horiz</mat-icon>
+                </button>
+                <div class="relative top-[25px]">
+                    <ng-select [items]="city" [(ngModel)]="to" bindLabel="name" bindValue="id" placeholder="To"
+                        [clearable]="false" class="w-[120px] sm:text-sm">
+                        <ng-template ng-option-tmp let-item="item">
+                            <div class="text-black">
+                                {{ item.name }}
+                            </div>
+                        </ng-template>
+                    </ng-select>
+                </div>
+            </div>
+            <div class="absolute top-[75px] left-1/2 -translate-x-1/2"><button class="w-[120px] h-[30px]"
+                    (click)="search(from,to)" mat-raised-button style="background-image: radial-gradient(circle farthest-side, #fceabb, #f8b500);">Search</button></div>
+        </div>
+    </div>
+    <div class="w-[260px] h-[420px] absolute left-1/2 -translate-x-1/2 top-[174px]">
+        <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="carouselConfig"
+            *ngIf="showCar else elseBlock">
+            <div *ngFor="let flight of flights"
+                class=" my-[5px] w-[260px] border-2 border-black rounded-[15px] bg-no-repeat bg-cover bg-[url('/../assets/bg/gold-bg.svg')]"
+                ngxSlickItem>
+                <div class="w-full h-full rounded-[15px] text-black z-[100]">
+                    <p class="relative font-itim text-[12px] top-[18px] left-[15px] font-bold">FLIGHT</p>
+                    <p class="relative font-antique text-[12px] font-bold -top-[15px] left-[70px]">{{flight.flightNo}}
+                    </p>
+                    <p class="relative font-hammer text-[20px] -top-[46.5px] left-[160px]">@ {{ flight.etd }}</p>
+                    <p class="relative font-hammer text-[20px] -top-[46px] left-[15px]">{{findCity(flight.from)}}</p>
+                    <p class="relative font-itim text-[20px] left-[30px] -top-[58px]">to</p>
+                    <p class="relative font-hammer text-[20px] -top-[66px] left-[15px]">{{findCity(flight.to)}}</p>
+                    <img src="../../assets/logos/{{flight.flightCompany}}.png" alt=""
+                        class="w-[110px] relative left-[130px] -top-[147px]" />
+                    <div class="relative left-[150px] -top-[138px]"><button mat-raised-button
+                            style="width:80px; height:30px; background: chartreuse;color:black"
+                            (click)="bookTkts(flight.flightNo)">BOOK</button></div>
+                </div>
+            </div>
+            <div class=" my-[5px] w-[260px] border-2 border-black text-black font-contrail rounded-[15px] bg-no-repeat bg-cover bg-[url('/../assets/bg/gold-bg.svg')]"
+                ngxSlickItem>
+                <p class="font-bold relative top-[30%] left-[10%]">Not what you are looking for?</p>
+                <p class="font-bold relative top-[24px] left-[72px]">Check for the next day!!!</p>
+                <div class="relative left-[150px] top-[15px]"><button routerLink="/flight" mat-raised-button
+                        style="width:80px; height:30px; background: chartreuse;color:black;">
+                        Tomorrow
+                    </button>
+                </div>
+            </div>
+        </ngx-slick-carousel>
+        <ng-template #elseBlock>
+            <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="carouselConfig">
+                <div *ngFor="let flight of searchedQuery"
+                    class=" my-[5px] w-[260px] border-2 border-black rounded-[15px] bg-no-repeat bg-cover bg-[url('/../assets/bg/gold-bg.svg')]"
+                    ngxSlickItem>
+                    <div class="w-full h-full rounded-[15px] text-black z-[100]">
+                        <p class="relative font-itim text-[12px] top-[18px] left-[15px] font-bold">FLIGHT</p>
+                        <p class="relative font-antique text-[12px] font-bold -top-[15px] left-[70px]">
+                            {{flight.flightNo}}
+                        </p>
+                        <p class="relative font-hammer text-[20px] -top-[46.5px] left-[160px]">@ {{ flight.etd }}</p>
+                        <p class="relative font-hammer text-[20px] -top-[46px] left-[15px]">{{findCity(flight.from)}}
+                        </p>
+                        <p class="relative font-itim text-[20px] left-[30px] -top-[58px]">to</p>
+                        <p class="relative font-hammer text-[20px] -top-[66px] left-[15px]">{{findCity(flight.to)}}</p>
+                        <img src="../../assets/logos/{{flight.flightCompany}}.png" alt=""
+                            class="w-[110px] relative left-[130px] -top-[147px]" />
+                        <div class="relative left-[150px] -top-[138px]"><button mat-raised-button
+                                style="width:80px; height:30px; background: chartreuse;color:black;"
+                                (click)="bookTkts(flight.flightNo)">BOOK</button></div>
+                    </div>
+                </div>
+            </ngx-slick-carousel>
+        </ng-template>
+    </div>
+</div>
+<div class="hidden lg:block">
+    <div class="w-full relative flex justify-center top-[15px]">
+        <div
+            class="z-[100] font-khand border-2 border-black w-[1000px] h-[150px] rounded-[25px] bg-no-repeat bg-cover bg-[url('/../assets/bg/search2-bg.svg')]">
+            <div class="flex w-full h-full">
+                <div class="flex flex-row justify-evenly w-full items-center">
+                    <div class="">
+                        <ng-select [items]="city" [(ngModel)]="from" bindLabel="name" bindValue="id" placeholder="From"
+                            [clearable]="false" class="w-[325px] sm:text-sm">
+                            <ng-template ng-option-tmp let-item="item">
+                                <div class="text-black">
+                                    {{ item.name }}
+                                </div>
+                            </ng-template>
+                        </ng-select>
+                    </div>
+                    <div>
+                        <button
+                            class="w-[40px] h-[40px] rounded-[50%] border-1 border-black bg-black text-white z-[100]"
+                            (click)="swap()">
+                            <mat-icon class="scale-150 relative top-[2px] -left-[0.7px]">swap_horiz</mat-icon>
+                        </button>
+                    </div>
+                    <div class="">
+                        <ng-select [items]="city" [(ngModel)]="to" bindLabel="name" bindValue="id" placeholder="To"
+                            [clearable]="false" class="w-[325px] sm:text-sm">
+                            <ng-template ng-option-tmp let-item="item">
+                                <div class="text-black">
+                                    {{ item.name }}
+                                </div>
+                            </ng-template>
+                        </ng-select>
+                    </div>
+                    <div class=""><button class="w-[120px] h-[30px]" (click)="search(from,to)" style="background-image: radial-gradient(circle farthest-side, #fceabb, #f8b500);"
+                            mat-raised-button>Search</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="w-full relative flex justify-center top-[15px]">
+        <div class="top-[15px] relative w-[1000px] h-[480px] rounded-[25px]">
+            <div class="w-[950px] h-full absolute left-1/2 -translate-x-1/2">
+                <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="carouselConfig"
+                    *ngIf="showCar else elBlock">
+                    <div *ngFor="let flight of flights"
+                        class=" my-[5px] w-full rounded-[15px] bg-no-repeat bg-cover bg-[url('/../assets/bg/carousal-bg.svg')]"
+                        ngxSlickItem>
+                        <div class="w-full h-full rounded-[15px] text-black z-[100]">
+                            <p class="relative font-itim text-[24px] top-[39px] left-[32px] font-bold">FLIGHT</p>
+                            <p class="relative font-antique text-[32px] font-bold top-[7px] left-[144px]">
+                                {{flight.flightNo}}
+                            </p>
+                            <p class="relative font-hammer text-[30px] top-[20px] left-[285px]">@ {{ flight.etd }}
+                            </p>
+                            <p class="relative font-hammer text-[27px] -top-[65px] left-[465px]">
+                                {{findCity(flight.from)}}</p>
+                            <p class="relative font-itim text-[27px] left-[484px] -top-[65px]">to</p>
+                            <p class="relative font-hammer text-[27px] -top-[65px] left-[465px]">{{findCity(flight.to)}}
+                            </p>
+                            <img src="../../assets/logos/{{flight.flightCompany}}.png" alt=""
+                                class="w-[250px] relative left-[670px] -top-[164px]" />
+                            <div class="relative left-[85px] -top-[170px]"><button mat-raised-button
+                                    style="width:100px; height:40px; background: chartreuse;color:black;"
+                                    (click)="bookTkts(flight.flightNo)">BOOK</button></div>
+                        </div>
+                    </div>
+                    <div class="my-[5px] w-full rounded-[15px] text-black font-courier text-[20px] bg-no-repeat bg-cover bg-[url('/../assets/bg/carousal-bg.svg')]"
+                        ngxSlickItem>
+                        <p class="font-bold relative top-[40%] left-[10%]">Not what you are looking for? Check for the
+                            next day!!!</p>
+                        <div class="relative top-[10px] left-[770px]"><button routerLink="/flight" mat-raised-button
+                                style="width:100px; height:40px; background: chartreuse;color:black;">
+                                Tomorrow
+                            </button></div>
+
+                    </div>
+                </ngx-slick-carousel>
+                <ng-template #elBlock>
+                    <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="carouselConfig">
+                        <div *ngFor="let flight of searchedQuery"
+                            class=" my-[5px] w-full rounded-[15px] bg-no-repeat bg-cover bg-[url('/../assets/bg/carousal-bg.svg')]"
+                            ngxSlickItem>
+                            <div class="w-full h-full rounded-[15px] text-black z-[100]">
+                                <p class="relative font-itim text-[24px] top-[39px] left-[32px] font-bold">FLIGHT</p>
+                                <p class="relative font-antique text-[32px] font-bold top-[7px] left-[144px]">
+                                    {{flight.flightNo}}
+                                </p>
+                                <p class="relative font-hammer text-[30px] top-[20px] left-[285px]">@ {{ flight.etd }}
+                                </p>
+                                <p class="relative font-hammer text-[27px] -top-[65px] left-[465px]">
+                                    {{findCity(flight.from)}}</p>
+                                <p class="relative font-itim text-[27px] left-[484px] -top-[65px]">to</p>
+                                <p class="relative font-hammer text-[27px] -top-[65px] left-[465px]">
+                                    {{findCity(flight.to)}}
+                                </p>
+                                <img src="../../assets/logos/{{flight.flightCompany}}.png" alt=""
+                                    class="w-[250px] relative left-[670px] -top-[164px]" />
+                                <div class="relative left-[85px] -top-[170px]"><button mat-raised-button
+                                        style="width:100px; height:40px; background: chartreuse;color:black;"
+                                        (click)="bookTkts(flight.flightNo)">BOOK</button></div>
+                            </div>
+                        </div>
+                    </ngx-slick-carousel>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>

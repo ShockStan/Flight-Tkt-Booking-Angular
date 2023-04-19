@@ -1,0 +1,18 @@
+p{
+    color:black;
+}
+.tier{
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+}
+img{
+    filter: drop-shadow(0 0 0.5rem white);
+}
+strong{
+    font-size: 18px;
+    font-weight: bold;
+}
+b{
+    font-weight: bold;
+    font-size: 15px;
+}

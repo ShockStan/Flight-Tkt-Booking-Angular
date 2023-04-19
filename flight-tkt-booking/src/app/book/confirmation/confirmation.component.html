@@ -1,0 +1,72 @@
+<form [formGroup]="userForm" (keydown.enter)="$event.preventDefault()" (ngSubmit)="openModal(template)">
+    <div formArrayName="passengers">
+        <div *ngFor="let passenger of passengers.controls;let i=index" [formGroupName]="i">
+            <div
+                class="bg-no-repeat bg-cover bg-[url('/../assets/bg/mobile-form.png')] lg:bg-[url('/../assets/bg/form.png')] w-[245px] h-[330px] border-3 border-black rounded-[25px] mx-auto mt-[20px] flex flex-col lg:h-[150px] lg:w-[800px] lg:flex-row lg:flex-wrap">
+                <div
+                    class="h-[40px] rounded-[8px] mx-auto relative top-[15px] lg:h-[28px] lg:w-[800px] lg:top-[4px] lg:text-center lg:rounded-0 lg:rounded-t-[8px]">
+                    <p class="m-0 p-0 font-[900] text-[#7fff00] text-[20px] lg:text-[19px] font-antique"
+                        style="-webkit-text-stroke-width: 1px; -webkit-text-stroke-color: #101299;">
+                        Passenger {{i+1}}</p>
+                </div>
+                <div
+                    class="h-[40px] w-[220px] left-[12px] relative bg-lime-300 rounded-[8px] top-[12px] lg:w-[242px] lg:-top-[12px] lg:left-[25px]">
+                    <input type="text" minlength="5" maxlength="10" id="name" required="required" formControlName="name" class="block rounded-[8px] px-2.5 w-full h-[40px] text-sm text-gray-900 bg-gray-50
+            border-2 border-black appearance-none focus:outline-none focus:ring-0 focus:border-[#7fff00] peer"
+                        placeholder=" " />
+                    <label for="name"
+                        class="absolute text-sm text-gray-500 duration-300 transform -translate-y-[0.80rem] scale-75 top-[10px] z-10
+            origin-[0] left-2.5 peer-focus:text-slate-700 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-[0.80rem]">Name</label>
+                </div>
+                <div
+                    class="h-[40px] w-[220px] left-[12px] bg-lime-300 rounded-[8px] relative top-[24.25px] lg:w-[242px] lg:-top-[12px] lg:left-[37px]">
+                    <input type="text" id="age" required="required" formControlName="age" type="number" class="block rounded-[8px] px-2.5 w-full h-[40px] text-sm text-gray-900 bg-gray-50
+    border-2 border-black appearance-none focus:outline-none focus:ring-0 focus:border-[#7fff00] peer"
+                        placeholder=" " />
+                    <label for="age"
+                        class="absolute text-sm text-gray-500 duration-300 transform -translate-y-[0.80rem] scale-75 top-[10px] z-10
+    origin-[0] left-2.5 peer-focus:text-slate-700 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-[0.80rem]">Age</label>
+                </div>
+                <div
+                    class="h-[40px] w-[220px] left-[12px] relative bg-lime-700 rounded-[8px] top-[36.25px] lg:w-[242px] lg:-top-[12px] lg:left-[49px]">
+                    <input type="text" maxlength="10" minlength="10" id="personalId" required="required" formControlName="personalId" class="block rounded-[8px] px-2.5 w-full h-[40px] text-sm text-gray-900 bg-gray-50
+    border-2 border-black appearance-none focus:outline-none focus:ring-0 focus:border-[#7fff00] peer"
+                        placeholder=" " />
+                    <label for="personalId"
+                        class="absolute text-sm text-gray-500 duration-300 transform -translate-y-[0.80rem] scale-75 top-[10px] z-10
+    origin-[0] left-2.5 peer-focus:text-slate-700 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-[0.80rem]">Personal
+                        ID</label>
+                </div>
+                <div
+                    class="h-[40px] w-[220px] bg-[#f5f5f5] lg:bg-transparent border-2 border-[#EC2146] lg:border-0 left-[12px] rounded-[8px] relative top-[48.25px] lg:w-[369px] lg:left-[75px] lg:-top-[0px]">
+                    <p class="mx-auto italic font-bold text-center relative top-[8px] text-[12px] lg:text-[20px] font-itim text-black"
+                        *ngIf="passenger.get('tier')?.value==='Business' else elseBlock">{{
+                        passenger.get('seatNo')?.value }} - {{ passenger.get('tier')?.value }} - {{bPrice | currency:"&#8377;"}}</p>
+                    <ng-template #elseBlock>
+                        <p class="mx-auto italic font-bold text-center relative top-[8px] text-[12px] lg:text-[20px] font-itim text-black">{{
+                            passenger.get('seatNo')?.value }} - {{ passenger.get('tier')?.value }} - {{ePrice | currency:"&#8377;"}}</p>
+                    </ng-template>
+                </div>
+                <div
+                    class="h-[40px] w-[220px] relative left-[12px] rounded-[8px] top-[60.25px] lg:w-[369px] lg:left-[37px] lg:-top-[3px]">
+                    <img class="relative aspect-auto w-[180px] mx-auto" src="../../assets/logos/{{flightCompany}}.png"
+                        alt="" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="flex flex-row mx-auto w-[220px] lg:w-[800px] justify-center">
+        <button mat-raised-button class="my-4 w-[200px]" style="border:2px black solid;background: linear-gradient(to right, #b615dd 0%, #d327a8 52%);">Book</button>
+    </div>
+    <div class="invisible w-[20px] h-[25px]"></div>
+</form>
+<div class="invisible w-[20px] h-[20px] relative top-[3%]"></div>
+<ng-template #template>
+    <div class="modal-body text-center bg-slate-100">
+        <p class="italic">It would cost you {{totalCost | currency:"&#8377;"}}. Confirm?</p>
+        <div class="flex flex-row justify-around">
+        <button type="button" class="btn btn-default bg-lime-500" (click)="confirm()">Accept</button>
+        <button type="button" class="btn btn-primary bg-red-500" (click)="decline()">Decline</button>
+        </div>
+    </div>
+</ng-template>

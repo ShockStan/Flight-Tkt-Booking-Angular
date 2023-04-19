@@ -1,0 +1,40 @@
+.verttext {
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+}
+.box {
+    border-color: #000 transparent transparent transparent;
+    border-radius: 50%/100px 100px 0 0;
+}
+.container {
+    background-color: #007ced;
+    background: linear-gradient(to bottom, #007ced 1%, #cce7ff 100%);
+}
+.night {
+    background-color: #e73c7e;
+    background: linear-gradient(to bottom, #e73c7e, #c766b3, #420352);
+}
+button{
+    z-index: 1;
+}
+#cloud-intro {
+    position: relative;
+    height: 100%;
+    background: url(../../assets/anime-bg/clouds1000.png);
+    background: url(../../assets/anime-bg/clouds1000.png) 0 200px,
+        url(../../assets/anime-bg/clouds1200_1.png) 0 300px,
+        url(../../assets/anime-bg/clouds1000_blur3.png) 100px 250px;
+    animation: wind 20s linear infinite;
+}
+.tkt{
+    background-image: url(../../assets/bg/tkt.png);
+    background-size: cover;
+}
+@keyframes wind {
+    0% {
+        background-position: 0 200px, 0 300px, 100px 250px;
+    }
+    100% {
+        background-position: 1000px 200px, 1200px 300px, 1100px 250px;
+    }
+}

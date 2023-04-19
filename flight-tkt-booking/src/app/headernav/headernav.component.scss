@@ -1,0 +1,56 @@
+mat-sidenav {
+  margin: 0;
+  width: 250px;
+  border-right: none;
+  border-radius: 10px;
+  padding: 0;
+  text-align: auto;
+  button{
+    position: relative;
+    left: 10%;
+  }
+}
+
+.content {
+  margin: 16px;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  overflow: auto;
+}
+
+mat-sidenav-container {
+  background: url(../../assets/bg/bg.jpg) no-repeat;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: -3;
+  height: 100vh;
+  margin-left: auto;
+}
+
+.menu-button {
+  font-size: 1rem;
+  mat-icon{
+    color:whitesmoke;
+  }
+  span{
+    color: white;
+  }
+}
+
+mat-divider {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.ig:hover {
+  border: 1px solid white;
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+}

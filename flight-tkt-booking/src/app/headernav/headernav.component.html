@@ -1,0 +1,86 @@
+<div>
+    <div class="bg-[#f8f8f8] flex flex-row w-full justify-between">
+        <div class="flex items-end"><button mat-icon-button [ngClass]="component==='HOME'?'invisible':''"
+                (click)="back()" matTooltip="BACK" matTooltipPosition="after">
+                <mat-icon>keyboard_arrow_left</mat-icon>
+            </button></div>
+        <div class="font-hammer text-black text-[20px] font-semibold flex items-center">{{component}}</div>
+        <div class="flex items-end">
+            <button mat-icon-button (click)="sidenav.toggle()">
+                <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+                <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+            </button>
+        </div>
+    </div>
+    <mat-sidenav-container class="bg">
+        <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8 bg-slate-700" position="end">
+            <div class="flex flex-col justify-evenly h-[60%]">
+                <a routerLink="/h/home">
+                <div class="w-full hover:bg-slate-500 py-3 hover:rounded-xl">
+                    <button mat-button class="menu-button">
+                        <mat-icon>home</mat-icon>
+                        <span>Home</span>
+                    </button>
+                </div>
+                </a>
+                <a routerLink="/flight">
+                <div class="w-full hover:bg-slate-500 py-3 hover:rounded-xl">
+                    <button mat-button class="menu-button">
+                        <mat-icon>flight</mat-icon>
+                        <span>Next Day</span>
+                    </button>
+                </div>
+                </a>
+                <a routerLink="/h/contact">
+                <div class="w-full hover:bg-slate-500 py-3 hover:rounded-xl">
+                    <button mat-button class="menu-button">
+                        <mat-icon>phone_iphone</mat-icon>
+                        <span>Contact</span>
+                    </button>
+                </div>
+                </a>
+                <a (click)="logout()">
+                    <div class="w-full hover:bg-slate-500 py-3 hover:rounded-xl">
+                        <button mat-button class="menu-button">
+                            <mat-icon>exit_to_app</mat-icon>
+                            <span>Log out</span>
+                        </button>
+                    </div>
+                </a>
+                <div>
+                    <div class="flex flex-row w-full h-[40px] justify-evenly items-center">
+                        <a href="{{socialMedia.ig}}" target="_blank">
+                            <div
+                                class="ig hover:-translate-y-2 hover:rounded-full w-[30px] h-[30px] hover:w-[40px] hover:h-[40px] flex justify-center items-center hover:text-white text-[22px] hover:font-bold">
+                                <fa-icon [icon]="igIcon"></fa-icon>
+                            </div>
+                        </a>
+                        <a href="{{socialMedia.twitter}}" target="_blank">
+                            <div
+                                class="hover:rounded-full hover:-translate-y-2 w-[30px] h-[30px] hover:w-[40px] hover:h-[40px] hover:bg-red-600 flex justify-center items-center hover:text-white text-[22px] hover:bg-[#1d9bf0] hover:border-white hover:border-[1px] hover:font-bold">
+                                <fa-icon [icon]="twitterIcon"></fa-icon>
+                            </div>
+                        </a>
+                        <a href="{{socialMedia.gh}}" target="_blank">
+                            <div
+                                class="hover:rounded-full hover:-translate-y-2 w-[30px] h-[30px] hover:w-[40px] hover:h-[40px] hover:bg-red-600 flex justify-center items-center hover:text-white text-[22px] hover:bg-[#24292f] hover:border-white hover:border-[1px] hover:font-bold">
+                                <fa-icon [icon]="githubIcon"></fa-icon>
+                            </div>
+                        </a>
+                        <a href="{{socialMedia.li}}" target="_blank">
+                            <div
+                                class="hover:rounded-full hover:-translate-y-2 w-[30px] h-[30px] hover:w-[40px] hover:h-[40px] hover:bg-red-600 flex justify-center items-center hover:text-white text-[22px] hover:border-white hover:border-[1px] hover:font-bold hover:bg-[#0077b5]">
+                                <fa-icon [icon]="liIcon"></fa-icon>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <div class="content mat-elevation-z8 h-[94vh] overflow-auto">
+                <router-outlet></router-outlet>
+            </div>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
